@@ -17,6 +17,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_09_152102) do
   create_table "exercises", force: :cascade do |t|
     t.string "name"
     t.text "description"
+    t.integer "rep_count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -29,9 +30,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_09_152102) do
   end
 
   create_table "workout_exercises", force: :cascade do |t|
-    t.integer "rep_count"
     t.datetime "date_of_workout"
     t.time "workout_length"
+    t.integer "workout_id"
+    t.integer "exercise_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
