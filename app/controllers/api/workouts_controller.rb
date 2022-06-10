@@ -1,7 +1,7 @@
-class WorkoutsController < ApplicationController
+class Api::WorkoutsController < ApplicationController
     def index 
-        workouts = Workout.all 
-        render json: workouts 
+        workouts = Workout.all
+        render json: workouts, include: ['exercises']
     end
     
     def show 
@@ -36,7 +36,8 @@ class WorkoutsController < ApplicationController
         workout = user.workouts.find_by(id: params[:id])
         if workout 
             workout.destroy 
-            render json: {success: "Run deleted."}
+            head :no_content 
+            # render json: {success: "Run deleted."}
         else 
             render json: {error: "Run not found"}, status: :not_found 
         end 

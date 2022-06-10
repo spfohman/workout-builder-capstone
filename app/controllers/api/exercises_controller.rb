@@ -1,4 +1,4 @@
-class ExercisesController < ApplicationController
+class Api::ExercisesController < ApplicationController
     def index 
         exercises = Exercise.all 
         render json: exercises 
@@ -10,8 +10,17 @@ class ExercisesController < ApplicationController
         else 
             render json: {errors: exercise.errors.full_messages}, status: :unprocessable_entity 
         end 
-        
+
     end
+    def update 
+        exercise = user.exercises.find_by(id: params[:id])
+        if exercise
+            exercise.update(exercise_params)
+            render json: exercise, status: :accepted 
+        else 
+            render json: {errors: exercise.errors.full_messages}, status: :not_found
+        end 
+    end 
 
     private 
 
