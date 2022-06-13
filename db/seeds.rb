@@ -16,4 +16,4 @@ squats = Exercise.create(name: "squats", rep_count: 15, description: "With your 
 
 workout1 = Workout.create(name: "workout1", desc: "New workout")
 
-WorkoutExercise.create(exercise: crunches, exercise: arm_curls, exercise: squats, workout: workout1)
+WorkoutExercise.create(workout_id: 1, exercise_id: 1)
