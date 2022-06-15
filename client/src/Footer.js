@@ -11,7 +11,7 @@ function Footer() {
           rel="noreferrer"
           href="mailto:pfohman.sarah@gmail.com"
         >
-          Email: Sarah Pfohman
+          Email
         </a>
         <br />
         <p>

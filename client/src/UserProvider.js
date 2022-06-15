@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-// import App from "./App";
 
 const UserContext = React.createContext();
 
@@ -18,7 +17,22 @@ function UserProvider({ children }) {
       }
     });
   }, []);
-
-  return <UserContext.Provider value={user}>{children}</UserContext.Provider>;
+  const signup = (user) => {
+    setUser(user);
+    setLoggedIn(true);
+  };
+  const logout = () => {
+    setUser(null);
+    setLoggedIn(false);
+  };
+  const login = (user) => {
+    setUser(user);
+    setLoggedIn(true);
+  };
+  return (
+    <UserContext.Provider value={(user, signup, logout, login, loggedIn)}>
+      {children}
+    </UserContext.Provider>
+  );
 }
 export { UserProvider, UserContext };

@@ -1,6 +1,8 @@
 import React from "react";
-
+import { UserContext } from "./UserProvider";
 function Home() {
+  const userData = React.useContext(UserContext);
+  console.log(userData);
   return (
     <div>
       <h1 className="landingHeader">Workout Builder</h1>
