@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 
-function Signup({ setUser }) {
+import { UserContext } from "./UserProvider";
+
+function Signup() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [signupErrors, setSignupErrors] = useState([]);
+  const { signup } = React.useContext(UserContext);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -21,8 +24,9 @@ function Signup({ setUser }) {
     })
       .then((response) => response.json())
       .then((data) => {
+        console.log(data);
         if (!data.error) {
-          setUser(data);
+          signup(data);
         } else {
           setSignupErrors(data.error);
           setUsername("");

@@ -1,7 +1,9 @@
 import "./App.css";
+import React from "react";
 import { UserProvider } from "./UserProvider";
 import Footer from "./Footer";
 import Home from "./Home";
+import UserHome from "./UserHome";
 import NavBar from "./NavBar";
 import { Route, Routes } from "react-router-dom";
 import Login from "./Login";
@@ -11,14 +13,18 @@ function App() {
   return (
     <div className="App">
       <UserProvider>
-        <NavBar />
-        <Routes>
-          <Route path="/login" element={<Login />} />
+        <div>
+          <NavBar />
+          <Routes>
+            <Route path="/userhome" element={<UserHome />} />
 
-          <Route path="/signUp" element={<Signup />} />
+            <Route path="/login" element={<Login />} />
 
-          <Route path="/home" element={<Home />} />
-        </Routes>
+            <Route path="/signUp" element={<Signup />} />
+
+            <Route path="/home" element={<Home />} />
+          </Routes>
+        </div>
       </UserProvider>
       <Footer></Footer>
     </div>

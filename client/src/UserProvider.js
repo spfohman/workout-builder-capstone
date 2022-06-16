@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 const UserContext = React.createContext();
 
 function UserProvider({ children }) {
-  const [user, setUser] = useState("sarah");
+  const [user, setUser] = useState(null);
   const [errors, setErrors] = useState([]);
   const [loggedIn, setLoggedIn] = useState(false);
 
@@ -17,6 +17,7 @@ function UserProvider({ children }) {
       }
     });
   }, []);
+
   const signup = (user) => {
     setUser(user);
     setLoggedIn(true);
@@ -29,8 +30,9 @@ function UserProvider({ children }) {
     setUser(user);
     setLoggedIn(true);
   };
+
   return (
-    <UserContext.Provider value={(user, signup, logout, login, loggedIn)}>
+    <UserContext.Provider value={{ user, login, logout, signup, loggedIn }}>
       {children}
     </UserContext.Provider>
   );

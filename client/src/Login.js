@@ -1,6 +1,8 @@
 import React, { useState } from "react";
+import { UserContext } from "./UserProvider";
 
-function Login({ setUser }) {
+function Login() {
+  const { login } = React.useContext(UserContext);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loginErrors, setLoginErrors] = useState([]);
@@ -17,7 +19,7 @@ function Login({ setUser }) {
       .then((response) => response.json())
       .then((data) => {
         if (!data.error) {
-          setUser(data);
+          login(data);
         } else {
           setLoginErrors(data.error);
           setUsername("");
