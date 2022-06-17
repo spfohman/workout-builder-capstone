@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { UserContext } from "./UserProvider";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const { login } = React.useContext(UserContext);
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loginErrors, setLoginErrors] = useState([]);
@@ -20,6 +22,7 @@ function Login() {
       .then((data) => {
         if (!data.error) {
           login(data);
+          navigate("/userhome");
         } else {
           setLoginErrors(data.error);
           setUsername("");

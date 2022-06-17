@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 import { UserContext } from "./UserProvider";
 
 function Signup() {
@@ -8,6 +8,7 @@ function Signup() {
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [signupErrors, setSignupErrors] = useState([]);
   const { signup } = React.useContext(UserContext);
+  const navigate = useNavigate();
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -27,6 +28,7 @@ function Signup() {
         console.log(data);
         if (!data.error) {
           signup(data);
+          navigate("/login");
         } else {
           setSignupErrors(data.error);
           setUsername("");

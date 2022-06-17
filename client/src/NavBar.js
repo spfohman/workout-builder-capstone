@@ -9,7 +9,10 @@ function NavBar() {
       {loggedIn ? (
         <div>
           {" "}
-          <button>Logout</button>
+          <NavLink to="userHome">Home</NavLink>
+          <NavLink to="addExercise">Add Exercise</NavLink>
+          <NavLink to="creteWorkout">Create Workout</NavLink>
+          <NavLink to="workoutList">All Workouts</NavLink>
         </div>
       ) : (
         <div>
