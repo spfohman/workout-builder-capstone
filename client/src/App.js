@@ -8,6 +8,9 @@ import NavBar from "./NavBar";
 import { Route, Routes } from "react-router-dom";
 import Login from "./Login";
 import Signup from "./Signup";
+import AddExercise from "./AddExercise";
+import CreateWorkout from "./CreateWorkout";
+import WorkoutList from "./WorkoutList";
 
 function App() {
   return (
@@ -17,7 +20,9 @@ function App() {
           <NavBar />
           <Routes>
             <Route path="/userhome" element={<UserHome />} />
-
+            <Route path="/addExercise" element={<AddExercise />} />
+            <Route path="/createWorkout" element={<CreateWorkout />} />
+            <Route path="/workoutList" element={<WorkoutList />} />
             <Route path="/login" element={<Login />} />
 
             <Route path="/signUp" element={<Signup />} />

@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { UserContext } from "./UserProvider";
+import Logout from "./Logout";
 
 function NavBar() {
   const { loggedIn } = React.useContext(UserContext);
@@ -11,8 +12,9 @@ function NavBar() {
           {" "}
           <NavLink to="userHome">Home</NavLink>
           <NavLink to="addExercise">Add Exercise</NavLink>
-          <NavLink to="creteWorkout">Create Workout</NavLink>
+          <NavLink to="createWorkout">Create Workout</NavLink>
           <NavLink to="workoutList">All Workouts</NavLink>
+          <Logout />
         </div>
       ) : (
         <div>
