@@ -4,7 +4,7 @@ class Api::ExercisesController < ApplicationController
         render json: exercises 
     end
     def create 
-        exercise = user.exercises.create(exercise_params)
+        exercise = Exercise.create(exercise_params)
         if exercise.valid? 
             render json: exercise, status: :created 
         else 
@@ -13,7 +13,7 @@ class Api::ExercisesController < ApplicationController
 
     end
     def update 
-        exercise = user.exercises.find_by(id: params[:id])
+        exercise = Exercise.find_by(id: params[:id])
         if exercise
             exercise.update(exercise_params)
             render json: exercise, status: :accepted 
@@ -25,6 +25,6 @@ class Api::ExercisesController < ApplicationController
     private 
 
     def exercise_params 
-        params.permit(:name, :description, :rep_count)
+        params.require(:exercise).permit(:name, :description, :rep_count)
     end
 end

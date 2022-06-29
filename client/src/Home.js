@@ -1,12 +1,13 @@
 import React from "react";
 import UserHome from "./UserHome";
+
 import { UserContext } from "./UserProvider";
 function Home() {
-  const { loggedIn } = React.useContext(UserContext);
+  const { user } = React.useContext(UserContext);
 
   return (
     <div>
-      {loggedIn ? (
+      {user ? (
         <UserHome />
       ) : (
         <div>

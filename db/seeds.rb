@@ -10,7 +10,7 @@ user1 = User.create(username: 'Sarah', password_digest: 'password')
 user2 = User.create(username: 'Oscar', password_digest: 'password')
 user3 = User.create(username: 'Abby', password_digest: 'password')
 
-crunches = Exercise.create(name: "crunches", rep_count: 30, description: "With fingers clasped behind your head raise you head off the floor about half way up. Lower back down, repeat.", )
+crunches = Exercise.create(name: "crunches", rep_count: 30, description: "With fingers clasped behind your head raise you head off the floor about half way up. Lower back down, repeat." )
 arm_curls = Exercise.create(name: "arm curls", rep_count: 15, description: "Use light to mid weight dumbells. With palm facing up, and elbow stationary, raise your hand up towards your shoulder. Lower and repeat for reps.")
 squats = Exercise.create(name: "squats", rep_count: 15, description: "With your feet placed hip width apart, lower down like you are sitting into a chair, then stand back up. Repeat for reps.")
 

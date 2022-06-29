@@ -10,7 +10,7 @@ function Logout() {
       method: "DELETE",
     }).then(() => {
       logout();
-      navigate("/home");
+      navigate("/");
     });
   }
   return (

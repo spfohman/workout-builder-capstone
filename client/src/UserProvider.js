@@ -32,7 +32,9 @@ function UserProvider({ children }) {
   };
 
   return (
-    <UserContext.Provider value={{ user, login, logout, signup, loggedIn }}>
+    <UserContext.Provider
+      value={{ user, login, logout, signup, loggedIn, errors }}
+    >
       {children}
     </UserContext.Provider>
   );
