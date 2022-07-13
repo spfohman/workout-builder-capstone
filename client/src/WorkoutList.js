@@ -1,15 +1,20 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
-function WorkoutList({ workouts }) {
+function WorkoutList({ workouts, workoutID }) {
+  const navigate = useNavigate();
+  function handleClick(value) {
+    workoutID(value);
+    navigate("/EachWorkout");
+  }
+
   const listOfWorkouts = workouts.map((workout) => (
     <div key={workout.id}>
       <p>Name: {workout.name}</p>
       <p>Description: {workout.desc}</p>
-      <button>This Workout</button>
-      {/* <ul>
-        <li>Exercises: {workout.exercises}</li>
-      </ul> */}
-      <hr></hr>
+      <button onClick={() => handleClick(workout.id)}>This Workout</button>
+
+      <hr />
     </div>
   ));
   return (

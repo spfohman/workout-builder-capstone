@@ -11,10 +11,12 @@ import Signup from "./Signup";
 import AddExercise from "./AddExercise";
 import CreateWorkout from "./CreateWorkout";
 import WorkoutList from "./WorkoutList";
+import EachWorkout from "./EachWorkout";
 
 function App() {
   const [exercises, setExercises] = useState([]);
-  const [workouts, setWorkouts] = useState([]);
+  const [allWorkouts, setAllWorkouts] = useState([]);
+  const [singleWorkout, setSingleWorkout] = useState([]);
 
   useEffect(() => {
     fetch("/api/exercises")
@@ -27,7 +29,7 @@ function App() {
     fetch("/api/workouts")
       .then((response) => response.json())
       .then((data) => {
-        setWorkouts(data);
+        setAllWorkouts(data);
       });
   }, []);
   function addExercises(newExercise) {
@@ -35,8 +37,14 @@ function App() {
     setExercises(updatedExercises);
   }
   function addWorkouts(newWorkout) {
-    const updatedWorkouts = [...workouts, newWorkout];
-    setWorkouts(updatedWorkouts);
+    const updatedWorkouts = [...allWorkouts, newWorkout];
+    setAllWorkouts(updatedWorkouts);
+  }
+  function workoutID(clickedWorkout) {
+    const workoutPicked = allWorkouts.filter((workout) => {
+      return workout.id === clickedWorkout;
+    });
+    setSingleWorkout(workoutPicked);
   }
   return (
     <div className="App">
@@ -59,8 +67,16 @@ function App() {
               }
             />
             <Route
+              path="/eachWorkout"
+              element={
+                <EachWorkout workoutID={workoutID} workout={singleWorkout} />
+              }
+            />
+            <Route
               path="/workoutList"
-              element={<WorkoutList workouts={workouts} />}
+              element={
+                <WorkoutList workouts={allWorkouts} workoutID={workoutID} />
+              }
             />
 
             <Route path="/login" element={<Login />} />

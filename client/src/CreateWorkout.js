@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function CreateWorkout({ exercises, addWorkouts }) {
-  const [checked, setChecked] = useState(false);
+  // const [checked, setChecked] = useState(false);
   const [workoutErrors, setWorkoutErrors] = useState([]);
   const [newWorkout, setNewWorkout] = useState({
     name: "",
@@ -43,10 +43,10 @@ function CreateWorkout({ exercises, addWorkouts }) {
         console.log(data);
         if (!data.error) {
           addWorkouts(data);
-          // setNewWorkout(data);
+
           navigate("/workoutlist");
 
-          setChecked(false);
+          // setChecked(false);
         } else {
           setWorkoutErrors(data.error);
           setNewWorkout({
@@ -57,8 +57,6 @@ function CreateWorkout({ exercises, addWorkouts }) {
           console.log(data.error);
         }
       });
-    //   .then(addWorkout);
-    //
   }
   const errorPs = workoutErrors.map((e) => (
     <p key={e} className="errors">
