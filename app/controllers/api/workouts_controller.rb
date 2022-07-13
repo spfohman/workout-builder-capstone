@@ -1,7 +1,7 @@
 class Api::WorkoutsController < ApplicationController
     def index 
         workouts = Workout.all
-        render json: workouts, include: ['exercises']
+        render json: workouts, include: ['exercise_ids']
     end
     
     def show 
@@ -14,11 +14,12 @@ class Api::WorkoutsController < ApplicationController
     end
 
     def create 
-        workout = user.workouts.create(workout_params)
+        workout = Workout.create(workout_params)
+      
         if workout.valid? 
             render json: workout, status: :created 
         else 
-            render json: {errors: workout.errors.full_messages}, status: :unprocessable_entity 
+            render json: {error: workout.errors.full_messages}, status: :unprocessable_entity 
         end 
     end
 
@@ -37,15 +38,15 @@ class Api::WorkoutsController < ApplicationController
         if workout 
             workout.destroy 
             head :no_content 
-            # render json: {success: "Run deleted."}
+            # render json: {success: "Workout deleted."}
         else 
-            render json: {error: "Run not found"}, status: :not_found 
+            render json: {error: "Workout not found"}, status: :not_found 
         end 
     end
 
     private 
     def workout_params 
-        params.require(:workout).permit(:name, :desc)
+        params.require(:workout).permit(:name, :desc, exercise_ids: [])
     end
 
 end

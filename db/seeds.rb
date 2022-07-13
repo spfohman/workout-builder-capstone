@@ -14,6 +14,6 @@ crunches = Exercise.create(name: "crunches", rep_count: 30, description: "With f
 arm_curls = Exercise.create(name: "arm curls", rep_count: 15, description: "Use light to mid weight dumbells. With palm facing up, and elbow stationary, raise your hand up towards your shoulder. Lower and repeat for reps.")
 squats = Exercise.create(name: "squats", rep_count: 15, description: "With your feet placed hip width apart, lower down like you are sitting into a chair, then stand back up. Repeat for reps.")
 
-workout1 = Workout.create(name: "workout1", desc: "New workout")
 
-WorkoutExercise.create(workout_id: 1, exercise_id: 1)
+
+workout1 = Workout.create(name: 'workout1', desc: 'workout', exercise_ids: [crunches.id, squats.id])
