@@ -2,7 +2,10 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function CreateWorkout({ exercises, addWorkouts }) {
-  // const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(
+    new Array(exercises.length).fill(false)
+  );
+
   const [workoutErrors, setWorkoutErrors] = useState([]);
   const [newWorkout, setNewWorkout] = useState({
     name: "",
@@ -11,15 +14,37 @@ function CreateWorkout({ exercises, addWorkouts }) {
   });
   const navigate = useNavigate();
 
-  const handleChange = (e) => {
+  const handleChange = (e, position) => {
     const name = e.target.name;
     const value =
       e.target.type === "checkbox" ? parseInt(e.target.value) : e.target.value;
     if (name === "exercise_ids") {
-      setNewWorkout({
-        ...newWorkout,
-        [name]: [...newWorkout.exercise_ids, value],
-      });
+      console.log(checked);
+      const updatedChecked = checked?.map((item, index) =>
+        index === position ? !item : item
+      );
+      setChecked(updatedChecked);
+      if (newWorkout.exercise_ids.includes(value)) {
+        let filterList = newWorkout.exercise_ids.filter((x) => {
+          return x !== value;
+        });
+        setNewWorkout({ ...newWorkout, [name]: filterList });
+      } else {
+        setNewWorkout({
+          ...newWorkout,
+          [name]: [...newWorkout.exercise_ids, value],
+        });
+      }
+      // if (checked === true) {
+      //   setNewWorkout({
+      //     ...newWorkout,
+      //     [name]: [...newWorkout.exercise_ids, value],
+      //   });
+      // }
+      // setNewWorkout({
+      //   ...newWorkout,
+      //   [name]: [...newWorkout.exercise_ids, value],
+      // });
       // setChecked(true);
     } else {
       setNewWorkout({ ...newWorkout, [name]: value });
@@ -45,8 +70,6 @@ function CreateWorkout({ exercises, addWorkouts }) {
           addWorkouts(data);
 
           navigate("/workoutlist");
-
-          // setChecked(false);
         } else {
           setWorkoutErrors(data.error);
           setNewWorkout({
@@ -63,7 +86,7 @@ function CreateWorkout({ exercises, addWorkouts }) {
       {e}
     </p>
   ));
-  const exerciseList = exercises.map((exercise) => (
+  const exerciseList = exercises.map((exercise, index) => (
     <div key={exercise.id}>
       <p>Name: {exercise.name}</p>
       <p>Description: {exercise.description}</p>
@@ -74,8 +97,8 @@ function CreateWorkout({ exercises, addWorkouts }) {
           type="checkbox"
           name="exercise_ids"
           value={exercise.id}
-          // checked={checked}
-          onChange={handleChange}
+          checked={checked[index]}
+          onChange={(event) => handleChange(event, index)}
         />
       </label>
       <hr />

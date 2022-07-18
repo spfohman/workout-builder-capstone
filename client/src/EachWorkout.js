@@ -1,15 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function EachWorkout({ workout }) {
-  console.log(workout);
+  const exer = workout.map((item) =>
+    item.exercises.map((ex) => (
+      <div>
+        <li key={ex.id}>Name: {ex.name}</li>
+        <p>Rep count: {ex.rep_count}</p>
+        <p>Description: {ex.description}</p>
+      </div>
+    ))
+  );
 
   const renderWorkout = workout.map((item) => (
     <div key={item.id}>
       <fieldset>
         <p>Name: {item.name}</p>
         <p>Description: {item.desc}</p>
-        <p>Exercises: {item.exercise_ids}</p>
+        <ul>Exercises: {exer}</ul>
         <button>start</button>
         <button>pause</button>
         <button>stop</button>

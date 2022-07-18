@@ -1,13 +1,14 @@
 class Api::WorkoutsController < ApplicationController
     def index 
         workouts = Workout.all
-        render json: workouts, include: ['exercise_ids']
+        render json: workouts
+        # , include: ['exercise_ids']
     end
     
     def show 
         workout = Workout.find_by_id(params[:id])
         if workout 
-            render json: workout 
+            render json: workout, include: ['exercise_ids'] 
         else
             render json: {error: "Workout not found."}, status: :not_found 
         end 

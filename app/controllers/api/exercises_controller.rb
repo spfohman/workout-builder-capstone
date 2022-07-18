@@ -1,7 +1,7 @@
 class Api::ExercisesController < ApplicationController
     def index 
         exercises = Exercise.all 
-        render json: exercises 
+        render json: exercises
     end
     def create 
         exercise = Exercise.create(exercise_params)
