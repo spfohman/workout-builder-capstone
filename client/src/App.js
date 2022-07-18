@@ -1,11 +1,11 @@
 import "./App.css";
 import React, { useEffect, useState } from "react";
+import { Route, Routes } from "react-router-dom";
 import { UserProvider } from "./UserProvider";
 import Footer from "./Footer";
 import Home from "./Home";
 import UserHome from "./UserHome";
 import NavBar from "./NavBar";
-import { Route, Routes } from "react-router-dom";
 import Login from "./Login";
 import Signup from "./Signup";
 import AddExercise from "./AddExercise";
@@ -17,6 +17,7 @@ function App() {
   const [exercises, setExercises] = useState([]);
   const [allWorkouts, setAllWorkouts] = useState([]);
   const [singleWorkout, setSingleWorkout] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
     fetch("/api/exercises")
@@ -25,6 +26,7 @@ function App() {
         setExercises(data);
       });
   }, []);
+
   useEffect(() => {
     fetch("/api/workouts")
       .then((response) => response.json())
@@ -32,10 +34,12 @@ function App() {
         setAllWorkouts(data);
       });
   }, []);
+
   function addExercises(newExercise) {
     const updatedExercises = [...exercises, newExercise];
     setExercises(updatedExercises);
   }
+
   function addWorkouts(newWorkout) {
     const updatedWorkouts = [...allWorkouts, newWorkout];
     setAllWorkouts(updatedWorkouts);
@@ -46,6 +50,11 @@ function App() {
     });
     setSingleWorkout(workoutPicked);
   }
+
+  const exercisesToDisplay = exercises.filter((exercise) => {
+    return exercise.name.toLowerCase().includes(searchTerm.toLowerCase());
+  });
+
   return (
     <div className="App">
       <UserProvider>
@@ -62,6 +71,9 @@ function App() {
               element={
                 <CreateWorkout
                   exercises={exercises}
+                  exercisesToDisplay={exercisesToDisplay}
+                  searchTerm={searchTerm}
+                  onSearch={setSearchTerm}
                   addWorkouts={addWorkouts}
                 />
               }

@@ -1,7 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import SearchBar from "./SearchBar";
 
-function CreateWorkout({ exercises, addWorkouts }) {
+function CreateWorkout({
+  exercises,
+  addWorkouts,
+  exercisesToDisplay,
+  searchTerm,
+  onSearch,
+}) {
   const [checked, setChecked] = useState(
     new Array(exercises.length).fill(false)
   );
@@ -35,17 +42,6 @@ function CreateWorkout({ exercises, addWorkouts }) {
           [name]: [...newWorkout.exercise_ids, value],
         });
       }
-      // if (checked === true) {
-      //   setNewWorkout({
-      //     ...newWorkout,
-      //     [name]: [...newWorkout.exercise_ids, value],
-      //   });
-      // }
-      // setNewWorkout({
-      //   ...newWorkout,
-      //   [name]: [...newWorkout.exercise_ids, value],
-      // });
-      // setChecked(true);
     } else {
       setNewWorkout({ ...newWorkout, [name]: value });
     }
@@ -86,7 +82,7 @@ function CreateWorkout({ exercises, addWorkouts }) {
       {e}
     </p>
   ));
-  const exerciseList = exercises.map((exercise, index) => (
+  const exerciseList = exercisesToDisplay.map((exercise, index) => (
     <div key={exercise.id}>
       <p>Name: {exercise.name}</p>
       <p>Description: {exercise.description}</p>
@@ -109,6 +105,7 @@ function CreateWorkout({ exercises, addWorkouts }) {
       {errorPs}
       <form onSubmit={handleSubmit}>
         <fieldset>
+          <SearchBar searchTerm={searchTerm} onSearch={onSearch} />
           {exerciseList}
           <p>
             <label htmlFor="name">Workout name:</label>
