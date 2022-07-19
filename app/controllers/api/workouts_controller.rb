@@ -35,7 +35,7 @@ class Api::WorkoutsController < ApplicationController
     end 
 
     def destroy 
-        workout = user.workouts.find_by(id: params[:id])
+        workout = Workout.find_by(id: params[:id])
         if workout 
             workout.destroy 
             head :no_content 

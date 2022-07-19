@@ -50,7 +50,12 @@ function App() {
     });
     setSingleWorkout(workoutPicked);
   }
-
+  function handleDeleteWorkout(deletedWorkout) {
+    const workoutToUpdate = allWorkouts.filter((workout) => {
+      return workout.id !== deletedWorkout;
+    });
+    setAllWorkouts(workoutToUpdate);
+  }
   const exercisesToDisplay = exercises.filter((exercise) => {
     return exercise.name.toLowerCase().includes(searchTerm.toLowerCase());
   });
@@ -87,7 +92,11 @@ function App() {
             <Route
               path="/workoutList"
               element={
-                <WorkoutList workouts={allWorkouts} workoutID={workoutID} />
+                <WorkoutList
+                  workouts={allWorkouts}
+                  workoutID={workoutID}
+                  handleDeleteWorkout={handleDeleteWorkout}
+                />
               }
             />
 

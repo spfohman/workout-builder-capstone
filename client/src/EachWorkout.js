@@ -7,12 +7,12 @@ function EachWorkout({ workout }) {
     item.exercises.map((ex) => (
       <div>
         {" "}
-        {console.log(ex)}
         <li key={ex.id}>
           <input key={ex.id} type="checkbox"></input>Name: {ex.name}
         </li>
         <p>Rep count: {ex.rep_count}</p>
         <p>Description: {ex.description}</p>
+        <hr />
       </div>
     ))
   );
@@ -22,7 +22,9 @@ function EachWorkout({ workout }) {
       <fieldset>
         <p>Name: {item.name}</p>
         <p>Description: {item.desc}</p>
+        <hr />
         <ul key={item.id}>Exercises: {exer}</ul>
+        <p>Timer:</p>
         <Timer />
       </fieldset>
     </div>
@@ -37,6 +39,7 @@ function EachWorkout({ workout }) {
     <div>
       <h1>do this workout</h1>
       {renderWorkout}
+
       <button onClick={handleClick}>back to workout list</button>
     </div>
   );
