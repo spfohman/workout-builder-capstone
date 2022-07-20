@@ -1,19 +1,27 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 
-function WorkoutList({ workouts, workoutID, handleDeleteWorkout }) {
-  // const [deleteWorkout, setDeleteWorkout] = useState(true);
-
+function WorkoutList({
+  workouts,
+  workoutID,
+  handleDeleteWorkout,
+  handleEditWorkout,
+}) {
   const navigate = useNavigate();
-  function handleClick(value) {
-    workoutID(value);
+
+  function handleClick(workout) {
+    workoutID(workout);
     navigate("/EachWorkout");
   }
+
+  function handleEditClick(workout) {
+    handleEditWorkout(workout);
+    navigate("/editworkout");
+  }
+
   function handleDeleteClick(workout) {
     const confirmBox = window.confirm("Are you sure you want to delete");
     if (confirmBox === true) {
-      console.log(workout);
-      console.log("true");
       fetch(`/api/workouts/${workout}`, {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
@@ -28,7 +36,7 @@ function WorkoutList({ workouts, workoutID, handleDeleteWorkout }) {
       <p>Name: {workout.name}</p>
       <p>Description: {workout.desc}</p>
       <button onClick={() => handleClick(workout.id)}>This Workout</button>
-      <button>Edit Workout</button>
+      <button onClick={() => handleEditClick(workout.id)}>Edit Workout</button>
       <button onClick={() => handleDeleteClick(workout.id)}>
         Delete Workout
       </button>

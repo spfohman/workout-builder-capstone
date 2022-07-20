@@ -12,6 +12,7 @@ import AddExercise from "./AddExercise";
 import CreateWorkout from "./CreateWorkout";
 import WorkoutList from "./WorkoutList";
 import EachWorkout from "./EachWorkout";
+import EditWorkout from "./EditWorkout";
 
 function App() {
   const [exercises, setExercises] = useState([]);
@@ -49,6 +50,12 @@ function App() {
       return workout.id === clickedWorkout;
     });
     setSingleWorkout(workoutPicked);
+  }
+  function handleEditWorkout(editWorkout) {
+    const workoutToUpdate = allWorkouts.filter((workout) => {
+      return workout.id === editWorkout;
+    });
+    setSingleWorkout(workoutToUpdate);
   }
   function handleDeleteWorkout(deletedWorkout) {
     const workoutToUpdate = allWorkouts.filter((workout) => {
@@ -90,11 +97,21 @@ function App() {
               }
             />
             <Route
+              path="/editWorkout"
+              element={
+                <EditWorkout
+                  handleEditWorkout={handleEditWorkout}
+                  singleWorkout={singleWorkout}
+                />
+              }
+            />
+            <Route
               path="/workoutList"
               element={
                 <WorkoutList
                   workouts={allWorkouts}
                   workoutID={workoutID}
+                  handleEditWorkout={handleEditWorkout}
                   handleDeleteWorkout={handleDeleteWorkout}
                 />
               }

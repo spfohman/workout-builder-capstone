@@ -25,7 +25,7 @@ class Api::WorkoutsController < ApplicationController
     end
 
     def update 
-        workout = user.workouts.find_by(id: params[:id])
+        workout = Workout.find_by(id: params[:id])
         if workout 
             workout.update(workout_params)
             render json: workout, status: :accepted 
