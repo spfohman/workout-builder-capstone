@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function EditWorkout({ handleEditWorkout, singleWorkout }) {
+function EditWorkout({ handleEditWorkout, singleWorkout, workoutID }) {
   const [workoutErrors, setWorkoutErrors] = useState([]);
   const [newWorkout, setNewWorkout] = useState({
     name: singleWorkout[0].name,
@@ -26,6 +26,7 @@ function EditWorkout({ handleEditWorkout, singleWorkout }) {
       name: newWorkout.name,
       desc: newWorkout.desc,
     };
+    console.log(addNewWorkout);
     fetch(`/api/workouts/${singleWorkout[0].id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },

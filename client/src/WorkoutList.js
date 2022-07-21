@@ -1,12 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-function WorkoutList({
-  workouts,
-  workoutID,
-  handleDeleteWorkout,
-  handleEditWorkout,
-}) {
+function WorkoutList({ workouts, workoutID, handleDeleteWorkout }) {
   const navigate = useNavigate();
 
   function handleClick(workout) {
@@ -15,7 +10,8 @@ function WorkoutList({
   }
 
   function handleEditClick(workout) {
-    handleEditWorkout(workout);
+    workoutID(workout);
+
     navigate("/editworkout");
   }
 
@@ -35,6 +31,8 @@ function WorkoutList({
     <div key={workout.id}>
       <p>Name: {workout.name}</p>
       <p>Description: {workout.desc}</p>
+      <button> 👍 </button>
+      <p> # likes </p>
       <button onClick={() => handleClick(workout.id)}>This Workout</button>
       <button onClick={() => handleEditClick(workout.id)}>Edit Workout</button>
       <button onClick={() => handleDeleteClick(workout.id)}>

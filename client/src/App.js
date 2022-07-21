@@ -51,11 +51,16 @@ function App() {
     });
     setSingleWorkout(workoutPicked);
   }
+
   function handleEditWorkout(editWorkout) {
-    const workoutToUpdate = allWorkouts.filter((workout) => {
-      return workout.id === editWorkout;
+    const workoutToUpdate = allWorkouts.map((workout) => {
+      if (workout.id === editWorkout.id) {
+        return editWorkout;
+      } else {
+        return workout;
+      }
     });
-    setSingleWorkout(workoutToUpdate);
+    setAllWorkouts(workoutToUpdate);
   }
   function handleDeleteWorkout(deletedWorkout) {
     const workoutToUpdate = allWorkouts.filter((workout) => {
@@ -93,13 +98,17 @@ function App() {
             <Route
               path="/eachWorkout"
               element={
-                <EachWorkout workoutID={workoutID} workout={singleWorkout} />
+                <EachWorkout
+                  workoutID={workoutID}
+                  singleWorkout={singleWorkout}
+                />
               }
             />
             <Route
               path="/editWorkout"
               element={
                 <EditWorkout
+                  workoutID={workoutID}
                   handleEditWorkout={handleEditWorkout}
                   singleWorkout={singleWorkout}
                 />

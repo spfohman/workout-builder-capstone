@@ -2,13 +2,12 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import Timer from "./Timer";
 
-function EachWorkout({ workout }) {
-  const exer = workout.map((item) =>
+function EachWorkout({ singleWorkout }) {
+  const exer = singleWorkout.map((item) =>
     item.exercises.map((ex) => (
-      <div>
-        {" "}
-        <li key={ex.id}>
-          <input key={ex.id} type="checkbox"></input>Name: {ex.name}
+      <div key={ex.id}>
+        <li>
+          <input type="checkbox"></input>Name: {ex.name}
         </li>
         <p>Rep count: {ex.rep_count}</p>
         <p>Description: {ex.description}</p>
@@ -17,7 +16,7 @@ function EachWorkout({ workout }) {
     ))
   );
 
-  const renderWorkout = workout.map((item) => (
+  const renderWorkout = singleWorkout.map((item) => (
     <div key={item.id}>
       <fieldset>
         <p>Name: {item.name}</p>
