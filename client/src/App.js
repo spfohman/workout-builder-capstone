@@ -68,6 +68,14 @@ function App() {
     });
     setAllWorkouts(workoutToUpdate);
   }
+
+  function handleLikeWorkout(updateLikes) {
+    const updatedLikes = allWorkouts.map((workout) => {
+      return workout.id === updateLikes.id ? updateLikes : workout;
+    });
+    setAllWorkouts(updatedLikes);
+  }
+
   const exercisesToDisplay = exercises.filter((exercise) => {
     return exercise.name.toLowerCase().includes(searchTerm.toLowerCase());
   });
@@ -122,6 +130,7 @@ function App() {
                   workoutID={workoutID}
                   handleEditWorkout={handleEditWorkout}
                   handleDeleteWorkout={handleDeleteWorkout}
+                  handleLikeWorkout={handleLikeWorkout}
                 />
               }
             />

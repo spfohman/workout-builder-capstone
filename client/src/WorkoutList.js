@@ -1,7 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
-function WorkoutList({ workouts, workoutID, handleDeleteWorkout }) {
+function WorkoutList({
+  workouts,
+  workoutID,
+  handleDeleteWorkout,
+  handleLikeWorkout,
+}) {
   const navigate = useNavigate();
 
   function handleClick(workout) {
@@ -11,7 +16,6 @@ function WorkoutList({ workouts, workoutID, handleDeleteWorkout }) {
 
   function handleEditClick(workout) {
     workoutID(workout);
-
     navigate("/editworkout");
   }
 
@@ -23,16 +27,31 @@ function WorkoutList({ workouts, workoutID, handleDeleteWorkout }) {
         headers: { "Content-Type": "application/json" },
       });
       handleDeleteWorkout(workout);
-    } else {
-      console.log("false");
     }
   }
+
+  function updateLikes(workout) {
+    const addLike = {
+      likes: workout.likes + 1,
+    };
+
+    fetch(`/api/workouts/${workout.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(addLike),
+    })
+      .then((response) => response.json())
+      .then(handleLikeWorkout);
+  }
+
   const listOfWorkouts = workouts.map((workout) => (
     <div key={workout.id}>
       <p>Name: {workout.name}</p>
       <p>Description: {workout.desc}</p>
-      <button> 👍 </button>
-      <p> # likes </p>
+      <button onClick={() => updateLikes(workout)}> 👍 </button>
+      <p> {workout.likes} likes </p>
       <button onClick={() => handleClick(workout.id)}>This Workout</button>
       <button onClick={() => handleEditClick(workout.id)}>Edit Workout</button>
       <button onClick={() => handleDeleteClick(workout.id)}>

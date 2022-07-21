@@ -17,6 +17,7 @@ function CreateWorkout({
   const [newWorkout, setNewWorkout] = useState({
     name: "",
     desc: "",
+    likes: 0,
     exercise_ids: [],
   });
   const navigate = useNavigate();
@@ -26,7 +27,6 @@ function CreateWorkout({
     const value =
       e.target.type === "checkbox" ? parseInt(e.target.value) : e.target.value;
     if (name === "exercise_ids") {
-      console.log(checked);
       const updatedChecked = checked?.map((item, index) =>
         index === position ? !item : item
       );
@@ -61,7 +61,6 @@ function CreateWorkout({
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         if (!data.error) {
           addWorkouts(data);
 

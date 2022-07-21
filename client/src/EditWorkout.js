@@ -26,7 +26,7 @@ function EditWorkout({ handleEditWorkout, singleWorkout, workoutID }) {
       name: newWorkout.name,
       desc: newWorkout.desc,
     };
-    console.log(addNewWorkout);
+
     fetch(`/api/workouts/${singleWorkout[0].id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
